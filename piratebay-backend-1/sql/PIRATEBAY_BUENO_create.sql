@@ -97,14 +97,28 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user
     NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
-
+-- Table: category
+CREATE TABLE category (
+    category_id serial  NOT NULL,
+    category_name varchar(30)  NOT NULL,
+    status int  NOT NULL,
+    tx_id int  NOT NULL,
+    tx_username varchar(100)  NOT NULL,
+    tx_host varchar(100)  NOT NULL,
+    tx_date timestamp  NOT NULL,
+    CONSTRAINT category_pk PRIMARY KEY (category_id)
+);
 -- Table: product
 CREATE TABLE product (
     product_id serial  NOT NULL,
+    category_id int  NOT NULL,
+    provider_id int NOT NULL,
     product_code varchar(30)  NOT NULL,
     cat_product_type varchar(30)  NOT NULL,
     product_name varchar(100)  NOT NULL,
     product_description int  NULL,
+    image varchar(100) NULL,
+    unit_price decimal(10,5)  NOT NULL,
     status int  NOT NULL,
     tx_id int  NOT NULL,
     tx_username varchar(100)  NOT NULL,
@@ -112,9 +126,11 @@ CREATE TABLE product (
     tx_date timestamp  NOT NULL,
     CONSTRAINT product_pk PRIMARY KEY (product_id)
 );
+
 -- Table: person
 CREATE TABLE person (
     person_id serial  NOT NULL,
+    user_id int NOT NULL,
     first_name varchar(100)  NOT NULL,
     second_name varchar(100)  NULL,
     third_name varchar(100)  NULL,
@@ -139,7 +155,7 @@ CREATE TABLE person (
 -- Table: order
 CREATE TABLE "order" (
     order_id serial  NOT NULL,
-    provider_id int  NOT NULL,
+    user_id int  NOT NULL,
     date timestamp  NOT NULL,
     status int  NOT NULL,
     tx_id int  NOT NULL,
@@ -148,15 +164,22 @@ CREATE TABLE "order" (
     tx_date timestamp  NOT NULL,
     CONSTRAINT order_pk PRIMARY KEY (order_id)
 );
+
+-- Reference: order_user (table: order)
+ALTER TABLE "order" ADD CONSTRAINT order_user
+    FOREIGN KEY (user_id)
+    REFERENCES "user" (user_id)
+    NOT DEFERRABLE
+    INITIALLY IMMEDIATE
+;
+
 -- Table: product_order
 CREATE TABLE product_order (
     provider_product_id serial  NOT NULL,
     order_id int  NOT NULL,
     product_id int  NOT NULL,
-    unit_price decimal(10,5)  NOT NULL,
     qtty_requested int  NOT NULL,
-    qtty_commit int  NULL,
-    qtty_received int  NULL,
+    unit_price decimal(10,5)  NOT NULL,
     status int  NOT NULL,
     tx_id int  NOT NULL,
     tx_username varchar(100)  NOT NULL,
@@ -171,10 +194,19 @@ ALTER TABLE product_order ADD CONSTRAINT product_order_order
     NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
+-- Reference: product_order_product (table: product_order)
+ALTER TABLE product_order ADD CONSTRAINT product_order_product
+    FOREIGN KEY (product_id)
+    REFERENCES product (product_id)
+    NOT DEFERRABLE
+    INITIALLY IMMEDIATE
+;
 
 
 
--- Table: warehouse
+
+
+-- Table: provider
 CREATE TABLE provider (
     provider_id serial  NOT NULL,
     provider_name varchar(100) NOT NULL,
@@ -194,42 +226,30 @@ CREATE TABLE provider (
 );
 
 
--- Reference: order_warehouse (table: order)
-ALTER TABLE "order" ADD CONSTRAINT order_provider
+
+
+
+
+-- Reference: product_category (table: product_category)
+ALTER TABLE product ADD CONSTRAINT product_category
+    FOREIGN KEY (category_id)
+    REFERENCES category (category_id)
+    NOT DEFERRABLE
+    INITIALLY IMMEDIATE
+;
+-- Reference: product_provider (table: product_provider)
+ALTER TABLE product ADD CONSTRAINT product_provider
     FOREIGN KEY (provider_id)
     REFERENCES provider (provider_id)
     NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
-
--- Table: person-user
-CREATE TABLE person_user (
-    person_user_id serial  NOT NULL,
-    person_id int  NOT NULL,
-    user_id int  NOT NULL,
-    status int  NOT NULL,
-    tx_id int  NOT NULL,
-    tx_username varchar(100)  NOT NULL,
-    tx_host varchar(100)  NOT NULL,
-    tx_date timestamp  NOT NULL,
-    CONSTRAINT person_user_pk PRIMARY KEY (person_user_id)
-);
-
--- Reference: person_user_person (table: person_user)
-ALTER TABLE person_user ADD CONSTRAINT person_user_person
-    FOREIGN KEY (person_id)
-    REFERENCES person (person_id)
-    NOT DEFERRABLE
-    INITIALLY IMMEDIATE
-;
-
--- Reference: person_user_user (table: person_user)
-ALTER TABLE person_user ADD CONSTRAINT person_user_user
+-- Reference: product_provider (table: product_provider)
+ALTER TABLE person ADD CONSTRAINT person_user
     FOREIGN KEY (user_id)
     REFERENCES "user" (user_id)
     NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
-
 --aqui acaba
