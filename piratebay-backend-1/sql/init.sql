@@ -32,10 +32,10 @@ INSERT INTO role ( role_name, status, tx_id, tx_username, tx_host, tx_date)
 VALUES ('ADMIN', 1,  1, 'admin', 'localhost', now());
 
 INSERT INTO role ( role_name, status, tx_id, tx_username, tx_host, tx_date)
-VALUES ('WAREHOUSE_SUPERVISOR', 1,  1, 'admin', 'localhost', now());
+VALUES ('PROVIDER', 1,  1, 'admin', 'localhost', now());
 
 INSERT INTO role ( role_name, status, tx_id, tx_username, tx_host, tx_date)
-VALUES ('WAREHOUSE_EMPLOYEE', 1,  1, 'admin', 'localhost', now());
+VALUES ('CLIENT', 1,  1, 'admin', 'localhost', now());
 
 -- ADMIN role
 INSERT INTO role_feature ( role_id, feature_id, status, tx_id, tx_username, tx_host, tx_date)
