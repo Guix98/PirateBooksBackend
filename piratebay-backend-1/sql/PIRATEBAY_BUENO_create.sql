@@ -99,7 +99,7 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_user
 ;
 -- Table: category
 CREATE TABLE category (
-    category_id serial  NOT NULL,
+    category_id serial  NOT NULL ,
     category_name varchar(30)  NOT NULL,
     status int  NOT NULL,
     tx_id int  NOT NULL,
@@ -108,15 +108,17 @@ CREATE TABLE category (
     tx_date timestamp  NOT NULL,
     CONSTRAINT category_pk PRIMARY KEY (category_id)
 );
+ALTER SEQUENCE caterogy_category_id_seq
+OWNED BY category.category_id;
 -- Table: product
 CREATE TABLE product (
     product_id serial  NOT NULL,
     category_id int  NOT NULL,
     provider_id int NOT NULL,
     product_code varchar(30)  NOT NULL,
-    cat_product_type varchar(30)  NOT NULL,
+    author varchar(100)  NOT NULL,
     product_name varchar(100)  NOT NULL,
-    product_description int  NULL,
+    product_description varchar(500) NULL,
     image varchar(100) NULL,
     unit_price decimal(10,5)  NOT NULL,
     status int  NOT NULL,
