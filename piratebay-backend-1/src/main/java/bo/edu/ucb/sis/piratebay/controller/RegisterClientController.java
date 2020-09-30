@@ -9,6 +9,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class RegisterClientController {
     private RegisterClientBl registerClientBl;
+
 
     @Value("${piratebay.security.secretJwt}")
     private String secretJwt;
@@ -39,8 +42,10 @@ public class RegisterClientController {
     public ResponseEntity<Map<String, Object>> InsertClient(@RequestBody RegisterClientModel registerClientModel) {
         boolean vReturn = this.registerClientBl.InsertClient(registerClientModel);
 
+
         if(vReturn){
             Map <String, Object> response = new HashMap();
+            response.put("password", registerClientModel.getPassword());
             response.put("message", "Register Ok");
             return new ResponseEntity<>(response, HttpStatus.OK);
 
