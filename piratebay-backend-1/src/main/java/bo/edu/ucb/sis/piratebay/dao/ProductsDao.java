@@ -22,7 +22,7 @@ public class ProductsDao {
 
     public List<ProductsModel> findAllProduct(String category_name) {
 
-        String query = "SELECT product_code, author, product_name, product_description, image, unit_price " +
+        String query = "SELECT product_name, product_code, product_description, image, author, unit_price " +
                 "\tFROM product a, category b"+
                 "\tWHERE a.category_id = b.category_id "+
                 "\tAND category_name= '"+category_name+"'";
