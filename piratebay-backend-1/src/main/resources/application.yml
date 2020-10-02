@@ -8,7 +8,7 @@ spring:
     platform: postgres
     url: jdbc:postgresql://localhost:5432/books
     username: postgres
-    password: ian
+    password: 1906
 
 piratebay:
   security:

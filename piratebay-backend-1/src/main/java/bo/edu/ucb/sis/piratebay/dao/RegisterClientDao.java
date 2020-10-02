@@ -39,7 +39,7 @@ public class RegisterClientDao {
                     .hashString(registerClientModel.getPassword()+salt, StandardCharsets.UTF_8)
                     .toString(); // TODO Repetir el algoritmo de hash N veces para encriptar
             jdbcTemplate.update("INSERT INTO public.user( user_id, username, password, email, phone_number,cat_user_status, status, tx_id, tx_username, tx_host,tx_date)VALUES(  nextval('user_user_id_seq') ,? , ?, ?, ?,?, 1, 1, 'root', '127.0.0.1',now())", registerClientModel.getUsername(),sha256hexpassword,registerClientModel.getEmail(),registerClientModel.getPhoneNumber(),registerClientModel.getCatUserStatus());
-                    return true;
+            return true;
         }
         catch (Exception ex)
         {

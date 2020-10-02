@@ -39,6 +39,7 @@ public class SecurityController {
 
         if( tokens != null ) {
             Map <String, Object> response = new HashMap();
+            response.put("user", credentialsModel.getUsername());
             response.put("message", "Authentication OK");
             response.put("authentication", tokens.get("authentication"));
             response.put("refresh", tokens.get("refresh"));

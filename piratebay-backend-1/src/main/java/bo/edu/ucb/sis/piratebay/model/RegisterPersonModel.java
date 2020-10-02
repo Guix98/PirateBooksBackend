@@ -1,13 +1,16 @@
 package bo.edu.ucb.sis.piratebay.model;
 
+import java.util.Date;
+
 public class RegisterPersonModel {
+    private String username;
     private String first_name;
     private String second_name;
     private String third_name;
     private String first_surname;
     private String second_surname;
     private String third_surname;
-    private String birthdate;
+    private Date birthdate;
     private String zone_direction;
     private String street_direction;
     private String document_id;
@@ -16,7 +19,11 @@ public class RegisterPersonModel {
     private String cat_genre;
     private String marital_status;
 
-    public RegisterPersonModel(String first_name, String second_name, String thrid_name, String first_surname, String second_surname, String thrid_surname, String birthdate, String zone_direction, String street_direction, String document_id, String document_expedition, String cat_document_type, String cat_genre, String marital_status) {
+    public RegisterPersonModel() {
+    }
+
+    public RegisterPersonModel(String username,String first_name, String second_name, String thrid_name, String first_surname, String second_surname, String thrid_surname, Date birthdate, String zone_direction, String street_direction, String document_id, String document_expedition, String cat_document_type, String cat_genre, String marital_status) {
+        this.username = username;
         this.first_name = first_name;
         this.second_name = second_name;
         this.third_name = thrid_name;
@@ -31,6 +38,15 @@ public class RegisterPersonModel {
         this.cat_document_type = cat_document_type;
         this.cat_genre = cat_genre;
         this.marital_status = marital_status;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirst_name() {
@@ -81,11 +97,11 @@ public class RegisterPersonModel {
         this.third_surname = third_surname;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
