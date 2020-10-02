@@ -45,7 +45,7 @@ public class RegisterClientController {
 
         if(vReturn){
             Map <String, Object> response = new HashMap();
-            response.put("password", registerClientModel.getPassword());
+            response.put("user", registerClientModel.getUsername());
             response.put("message", "Register Ok");
             return new ResponseEntity<>(response, HttpStatus.OK);
 
