@@ -1,7 +1,9 @@
 package bo.edu.ucb.sis.piratebay.controller;
 
 import bo.edu.ucb.sis.piratebay.bl.ProductsBl;
+import bo.edu.ucb.sis.piratebay.bl.ProvedorBl;
 import bo.edu.ucb.sis.piratebay.model.ProductsModel;
+import bo.edu.ucb.sis.piratebay.model.ProvedorModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -18,22 +20,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/v1/provedor")
 @CrossOrigin(origins = "*")
-public class ProductsController {
-private ProductsBl productsBl;
+public class ProviderController {
+
+    private ProvedorBl provedorBl;
 
     @Value("${piratebay.security.secretJwt}")
     private String secretJwt;
 
     @Autowired
-    public ProductsController(ProductsBl productsBl) {
-        this.productsBl= productsBl;
+    public ProviderController(ProvedorBl provedorBl) {
+        this.provedorBl= provedorBl;
     }
 
-    @RequestMapping(method = RequestMethod.POST,
+    @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductsModel>> findAllProduct(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
+    public ResponseEntity<List<ProvedorModel>> findProvedor(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
 
         // Lo unico que estamos haciendo es decodificar el token.
         String tokenJwT = authorization.substring(7);
@@ -42,7 +45,7 @@ private ProductsBl productsBl;
         String idUsuario = decodedJWT.getSubject();
         System.out.println("USUARIO: " + idUsuario);
         JSONObject jsonObject = new JSONObject(json);
-        String order = jsonObject.getString("orderName");
+        int order = Integer.parseInt(jsonObject.getString("orderName"));
         System.out.println("ORDER_NAME: " + order);
         if(!"AUTHN".equals(decodedJWT.getClaim("type").asString()) ) {
             throw new RuntimeException("El token proporcionado no es un token de Autenthication");
@@ -55,7 +58,6 @@ private ProductsBl productsBl;
                 .build();
         verifier.verify(tokenJwT);
 
-        return new ResponseEntity<>( this.productsBl.findAllProduct(order), HttpStatus.OK);
+        return new ResponseEntity<>( this.provedorBl.findProvedor(order), HttpStatus.OK);
     }
-
 }

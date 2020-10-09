@@ -21,4 +21,8 @@ public class ProvedorBl {
     public List<ProvedorModel> findAllProvedor() {
         return this.provedorDao.findAllProvedor();
     }
+
+    public List<ProvedorModel> findProvedor(int provider_id) {
+        return this.provedorDao.findProvedor(provider_id);
+    }
 }
