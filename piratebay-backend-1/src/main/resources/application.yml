@@ -9,6 +9,17 @@ spring:
     url: jdbc:postgresql://localhost:5432/books
     username: postgres
     password: ian
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: luis.medina.medina0803@gmail.com
+    password: angelito111
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    scheduler.persistence.enabled: false
+    scheduler.persistence.redis.embedded: false
+    scheduler.persistence.redis.enabled: false
 
 piratebay:
   security:

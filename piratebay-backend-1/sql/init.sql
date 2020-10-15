@@ -55,7 +55,7 @@ VALUES (2, 2, 1,  1, 'admin', 'localhost', now());
 INSERT INTO role_feature ( role_id, feature_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (3, 2, 1,  1, 'admin', 'localhost', now());
 
--- CONFIGURACIÍN DE USUARIOS
+-- CONFIGURACIÓN DE USUARIOS
 
 INSERT INTO user_role ( user_id, role_id, status, tx_id, tx_username, tx_host, tx_date)
 VALUES (2, 2, 1,  1, 'admin', 'localhost', now());
