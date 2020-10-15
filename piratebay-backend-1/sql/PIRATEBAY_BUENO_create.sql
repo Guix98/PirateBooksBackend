@@ -108,7 +108,7 @@ CREATE TABLE category (
     tx_date timestamp  NOT NULL,
     CONSTRAINT category_pk PRIMARY KEY (category_id)
 );
-ALTER SEQUENCE caterogy_category_id_seq
+ALTER SEQUENCE category_category_id_seq
 OWNED BY category.category_id;
 -- Table: product
 CREATE TABLE product (

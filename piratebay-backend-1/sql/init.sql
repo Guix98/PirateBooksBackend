@@ -75,7 +75,7 @@ VALUES
 
 --insert para categoria
 
-INSERT INTO "category" (category_id, category_name, status, tx_id, tx_username, tx_host, tx_date) VALUES (nextval('caterogy_category_id_seq'), 'Cientifico',1, 1, 'root', '127.0.0.1', now());
+INSERT INTO "category" (category_id, category_name, status, tx_id, tx_username, tx_host, tx_date) VALUES (nextval('category_category_id_seq'), 'Cientifico',1, 1, 'root', '127.0.0.1', now());
 INSERT INTO "category" (category_id, category_name, status, tx_id, tx_username, tx_host, tx_date) VALUES (nextval('category_category_id_seq'), 'Monografias', 1, 1, 'root', '127.0.0.1', now());
 INSERT INTO "category" (category_id, category_name, status, tx_id, tx_username, tx_host, tx_date) VALUES (nextval('category_category_id_seq'), 'Instructivos', 1, 1, 'root', '127.0.0.1', now());
 INSERT INTO "category" (category_id, category_name, status, tx_id, tx_username, tx_host, tx_date) VALUES (nextval('category_category_id_seq'), 'Educativos', 1, 1, 'root', '127.0.0.1', now());
