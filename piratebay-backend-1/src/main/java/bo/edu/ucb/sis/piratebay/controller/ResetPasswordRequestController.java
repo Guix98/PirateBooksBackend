@@ -13,7 +13,7 @@ import javax.mail.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/v1/resetpassword")
+@RequestMapping("/api/v1/resetpasswordrequest")
 @CrossOrigin(origins = "*")
 public class ResetPasswordRequestController {
 
