@@ -49,7 +49,7 @@ public class ResetPasswordRequestBl {
         });
 
         // Concadenamos la url con el usuario
-        String a="localhost:4200/#/resetpassword/"+resetPasswordRequestModel.getEmail();
+        String a="http://localhost:4200/#/resetpassword/"+resetPasswordRequestModel.getEmail();
         System.out.println(a);
         System.out.println(resetPasswordRequestModel.getEmail());
         Message msg = new MimeMessage(session);
@@ -70,7 +70,7 @@ public class ResetPasswordRequestBl {
 
         //attachPart.attachFile("C:\\Users\\Luchin111\\Desktop\\perfil.jpeg");
 
-        multipart.addBodyPart(attachPart);
+        //multipart.addBodyPart(attachPart);
         msg.setContent(multipart);
         // sends the e-mail
         Transport.send(msg);
