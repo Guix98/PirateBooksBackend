@@ -1,6 +1,8 @@
 package bo.edu.ucb.sis.piratebay.bl;
 
 import bo.edu.ucb.sis.piratebay.dao.ProvedorDao;
+import bo.edu.ucb.sis.piratebay.dao.ResetPasswordRequestDao;
+import bo.edu.ucb.sis.piratebay.model.ProductsModel;
 import bo.edu.ucb.sis.piratebay.model.ResetPasswordRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,11 +15,12 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 @Service
 public class ResetPasswordRequestBl {
-    private ProvedorDao provedorDao;
+    private ResetPasswordRequestDao resetPasswordRequestDao;
 
     @Value("${spring.mail.username}")
     private String username;
@@ -25,12 +28,14 @@ public class ResetPasswordRequestBl {
     private String password;
 
     @Autowired
-    public ResetPasswordRequestBl(ProvedorDao provedorDao) {
-        this.provedorDao = provedorDao;
+    public ResetPasswordRequestBl(ResetPasswordRequestDao resetPasswordRequestDao) {
+        this.resetPasswordRequestDao = resetPasswordRequestDao;
     }
-
+    public List<ResetPasswordRequestModel> finUserByEmail(String email) {
+        return this.resetPasswordRequestDao.findUserByEmail(email);
+    }
     public void sendmail(ResetPasswordRequestModel resetPasswordRequestModel) throws MessagingException, IOException {
-
+        //this.resetPasswordRequestDao.findUserByEmail(resetPasswordRequestModel.getEmail());
         Properties props= new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -42,20 +47,23 @@ public class ResetPasswordRequestBl {
                 return new PasswordAuthentication(username,password);
             }
         });
-        String a=resetPasswordRequestModel.getBody()+"http://gmail.com/"+"1";
+
+        // Concadenamos la url con el usuario
+        String a="http://gmail.com/"+resetPasswordRequestModel.getEmail();
+        System.out.println(a);
+        System.out.println(resetPasswordRequestModel.getEmail());
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(username, false));
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(resetPasswordRequestModel.getEmail()));
-        msg.setSubject(resetPasswordRequestModel.getSubject());
-        msg.setContent(resetPasswordRequestModel.getBody(), "text/html");
+        msg.setSubject("Piratebay Cambio de Contraseña");
+        msg.setContent("Piratebay Cambio de Contraseña", "text/html");
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
 
         //Ponemos el link y el usuario que cambiara su contraseña en el correo
-        messageBodyPart.setContent(resetPasswordRequestModel.getBody()+". Ingrese a ese link porfavor http://gmail.com/"+"1", "text/html");
-        messageBodyPart.setContent("<html><center><b>"+resetPasswordRequestModel.getBody()+"</b><br> <font color=#00000>URL</font>", "text/html");
+        messageBodyPart.setContent("<html><center><b>Para cambiar su contraseña ingrese al siguiente link :</b><br> <font color=#00000>"+a+"</font>", "text/html");
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
         MimeBodyPart attachPart = new MimeBodyPart();

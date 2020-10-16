@@ -1,6 +1,7 @@
 package bo.edu.ucb.sis.piratebay.dao;
 
 import bo.edu.ucb.sis.piratebay.model.ProvedorModel;
+import bo.edu.ucb.sis.piratebay.model.ResetPasswordRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,19 +20,20 @@ public class ResetPasswordRequestDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<ProvedorModel> findAllProvedor() {
+    public List<ResetPasswordRequestModel> findUserByEmail(String email) {
 
-        String query = "SELECT provider_id, provider_name " +
-                "\tFROM provider a";
+        String query = "SELECT  email, username, password\n" +
+                "\tFROM public.\"user\"\n" +
+                "\tWHERE email='"+email+"';";
 
 
-        List<ProvedorModel> result = null;
+        List<ResetPasswordRequestModel> result = null;
         try {
-            result = jdbcTemplate.query(query, new RowMapper<ProvedorModel>() {
+            result = jdbcTemplate.query(query, new RowMapper<ResetPasswordRequestModel>() {
                 @Override
-                public ProvedorModel mapRow(ResultSet resultSet, int i) throws SQLException {
-                    return new ProvedorModel(
-                            resultSet.getInt(1),
+                public ResetPasswordRequestModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                    return new ResetPasswordRequestModel(
+                            resultSet.getString(1),
                             resultSet.getString(2));
                 }
             });

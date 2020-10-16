@@ -5,17 +5,15 @@ import javax.validation.constraints.NotNull;
 public class ResetPasswordRequestModel {
     private String email;
 
-    private String subject;
+    private String username;
 
-    private String body;
 
     public ResetPasswordRequestModel() {
     }
 
-    public ResetPasswordRequestModel(String email, String subject, String body) {
+    public ResetPasswordRequestModel(String email, String subject) {
         this.email = email;
-        this.subject = subject;
-        this.body = body;
+        this.username = subject;
     }
 
     public String getEmail() {
@@ -26,19 +24,11 @@ public class ResetPasswordRequestModel {
         this.email = email;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
