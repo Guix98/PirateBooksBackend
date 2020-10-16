@@ -34,7 +34,7 @@ public class ProviderController {
         this.provedorBl= provedorBl;
     }
 
-    @RequestMapping(method = RequestMethod.GET,
+    @RequestMapping(method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProvedorModel>> findProvedor(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
 
