@@ -49,7 +49,7 @@ public class ResetPasswordRequestBl {
         });
 
         // Concadenamos la url con el usuario
-        String a="http://gmail.com/"+resetPasswordRequestModel.getEmail();
+        String a="localhost:4200/#/resetpassword/"+resetPasswordRequestModel.getEmail();
         System.out.println(a);
         System.out.println(resetPasswordRequestModel.getEmail());
         Message msg = new MimeMessage(session);
