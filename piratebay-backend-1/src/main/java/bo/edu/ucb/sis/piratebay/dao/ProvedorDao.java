@@ -22,7 +22,7 @@ public class ProvedorDao {
 
     public List<ProvedorModel> findAllProvedor() {
 
-        String query = "SELECT provider_id, provider_name " +
+        String query = "SELECT provider_id, provider_name, provider_zone, provider_street, email, phone, phone2 " +
                 "\tFROM provider a";
 
 
@@ -33,7 +33,12 @@ public class ProvedorDao {
                 public ProvedorModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new ProvedorModel(
                             resultSet.getInt(1),
-                            resultSet.getString(2));
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7));
                 }
             });
         } catch (Exception ex) {

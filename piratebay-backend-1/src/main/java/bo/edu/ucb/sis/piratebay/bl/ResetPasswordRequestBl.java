@@ -66,9 +66,9 @@ public class ResetPasswordRequestBl {
         messageBodyPart.setContent("<html><center><b>Para cambiar su contraseña ingrese al siguiente link :</b><br> <font color=#00000>"+a+"</font>", "text/html");
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
-        MimeBodyPart attachPart = new MimeBodyPart();
+        //MimeBodyPart attachPart = new MimeBodyPart();
 
-        attachPart.attachFile("C:\\Users\\Luchin111\\Desktop\\perfil.jpeg");
+        //attachPart.attachFile("C:\\Users\\Luchin111\\Desktop\\perfil.jpeg");
 
         multipart.addBodyPart(attachPart);
         msg.setContent(multipart);
