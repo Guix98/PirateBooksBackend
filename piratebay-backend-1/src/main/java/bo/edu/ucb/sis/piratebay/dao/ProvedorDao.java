@@ -2,6 +2,7 @@ package bo.edu.ucb.sis.piratebay.dao;
 
 import bo.edu.ucb.sis.piratebay.model.BooksModel;
 import bo.edu.ucb.sis.piratebay.model.ProvedorModel;
+import bo.edu.ucb.sis.piratebay.model.RegisterProviderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -74,5 +75,21 @@ public class ProvedorDao {
             throw new RuntimeException();
         }
         return result;
+    }
+
+    public  boolean DeleteProvider(int provider_id) {
+        // Implmentamos SQL varible binding para evitar SQL INJECTION
+
+        try {
+
+            jdbcTemplate.update("DELETE FROM provider WHERE provider_id= '"+provider_id+"'");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Error per:"+ ex);
+            return  false;
+        }
+
     }
 }
