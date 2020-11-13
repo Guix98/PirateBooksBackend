@@ -36,7 +36,8 @@ public class DetailOrderController {
 
     @RequestMapping(method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DetailOrderModel>> findOrder(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
+    public ResponseEntity<List<DetailOrderModel>> findOrder(@RequestHeader("Authorization") String authorization,
+                                                            @RequestBody String json) throws JSONException { // bearer asdasdasdasd
 
         // Lo unico que estamos haciendo es decodificar el token.
         String tokenJwT = authorization.substring(7);
