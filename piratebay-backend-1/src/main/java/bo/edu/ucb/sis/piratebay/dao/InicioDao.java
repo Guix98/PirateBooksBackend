@@ -24,7 +24,7 @@ public class InicioDao {
 
         String query = "SELECT product_name, product_code, product_description, image, author, unit_price " +
                 "\tFROM product a"+
-                "\tORDER BY product_code DESC LIMIT 6";
+                "\tORDER BY product_code DESC";
 
 
         List<InicioModel> result = null;
