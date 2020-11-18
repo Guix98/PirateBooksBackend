@@ -3,6 +3,7 @@ package bo.edu.ucb.sis.piratebay.bl;
 
 import bo.edu.ucb.sis.piratebay.dao.OrderDao;
 import bo.edu.ucb.sis.piratebay.model.BooksModel;
+import bo.edu.ucb.sis.piratebay.model.CartModel;
 import bo.edu.ucb.sis.piratebay.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,11 @@ public class OrderBl {
     public List<OrderModel> findAllOrders() {
         return this.orderDao.findAllOrders();
     }
+    public List<CartModel> findCarrito(int order) {
+        return this.orderDao.findCarrito(order);
+    }
+    public boolean InsertOrder(OrderModel OrderModel) {
+        return this.orderDao.InsertOrder(OrderModel);
+    }
+
 }

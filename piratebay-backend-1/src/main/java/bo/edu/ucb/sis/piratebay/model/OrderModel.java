@@ -4,17 +4,15 @@ import java.util.Date;
 
 public class OrderModel {
     private int order_id;
-    private String username;
+    private int userid;
     private Date date;
-    private String email;
-    private String phone_number;
+    private double amount;
 
-    public OrderModel(int order_id, String username, Date date, String email, String phone_number) {
+    public OrderModel(int order_id, int userid, Date date, double amount) {
         this.order_id = order_id;
-        this.username = username;
+        this.userid = userid;
         this.date = date;
-        this.email = email;
-        this.phone_number = phone_number;
+        this.amount = amount;
     }
 
     public int getOrder_id() {
@@ -25,12 +23,12 @@ public class OrderModel {
         this.order_id = order_id;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public Date getDate() {
@@ -41,19 +39,11 @@ public class OrderModel {
         this.date = date;
     }
 
-    public String getEmail() {
-        return email;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }
