@@ -22,7 +22,7 @@ public class OrderDao {
 
     public List<OrderModel> findAllOrders() {
 
-        String query = "SELECT order_id, x.user_id,  \"date\", amount\n" +
+        String query = "SELECT order_id, y.username,  \"date\", amount\n" +
                 "                FROM \"order\" x, \"user\" y\n" +
                 "                WHERE x.user_id = y.user_id;";
         List<OrderModel> result = null;
@@ -32,7 +32,7 @@ public class OrderDao {
                 public OrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new OrderModel(
                             resultSet.getInt(1),
-                            resultSet.getInt(2),
+                            resultSet.getString(2),
                             resultSet.getDate(3),
                             resultSet.getDouble(4));
 
@@ -49,7 +49,7 @@ public class OrderDao {
                 "from \"order\" x, \"user\" y, product z, product_order w\n" +
                 "WHERE x.order_id=w.order_id\n" +
                 "AND   x.user_id=y.user_id\n" +
-                "AND   w.product_id=z.product_id" +
+                "AND   w.product_id=z.product_id\n" +
                 "AND   x.order_id = "+order;
         List<CartModel> result = null;
         try {

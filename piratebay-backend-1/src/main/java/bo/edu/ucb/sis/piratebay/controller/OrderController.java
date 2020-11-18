@@ -64,7 +64,7 @@ public class OrderController {
             value = "carrito",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CartModel>> findCarrito(@RequestHeader("Authorization") String authorization, @RequestBody int order) throws JSONException { // bearer asdasdasdasd
+    public ResponseEntity<List<CartModel>> findCarrito(@RequestHeader("Authorization") String authorization, @RequestBody String json) throws JSONException { // bearer asdasdasdasd
 
         // Lo unico que estamos haciendo es decodificar el token.
         String tokenJwT = authorization.substring(7);
@@ -82,6 +82,8 @@ public class OrderController {
                 .withIssuer("PirateBay")
                 .build();
         verifier.verify(tokenJwT);
+        JSONObject jsonObject = new JSONObject(json);
+        int order = Integer.parseInt(jsonObject.getString("order"));
 
         return new ResponseEntity<>( this.orderBl.findCarrito(order), HttpStatus.OK);
     }

@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class OrderModel {
     private int order_id;
-    private int userid;
+    private String userid;
     private Date date;
     private double amount;
 
-    public OrderModel(int order_id, int userid, Date date, double amount) {
+    public OrderModel(int order_id, String userid, Date date, double amount) {
         this.order_id = order_id;
         this.userid = userid;
         this.date = date;
@@ -23,11 +23,11 @@ public class OrderModel {
         this.order_id = order_id;
     }
 
-    public int getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 

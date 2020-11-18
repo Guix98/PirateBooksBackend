@@ -9,9 +9,7 @@ public class ProvedorModel {
     private String phone;
     private String phone2;
 
-    public ProvedorModel(int provider_id, String provider_name) {
-        this.provider_id = provider_id;
-        this.provider_name = provider_name;
+    public ProvedorModel() {
     }
 
     public ProvedorModel(int provider_id, String provider_name, String provider_zone, String provider_street, String email, String phone, String phone2) {
