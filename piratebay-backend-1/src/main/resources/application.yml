@@ -6,9 +6,9 @@ spring:
     name: piratebay-backend
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/books
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: ian
+    password: 123456
   mail:
     host: smtp.gmail.com
     port: 587
