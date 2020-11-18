@@ -26,7 +26,7 @@ public class ProductsDao {
                 "\tFROM product a, category b"+
                 "\tWHERE a.category_id = b.category_id "+
                 "\tAND category_name= '"+category_name+"'";
-        List<ProductsModel> result = null;
+        List<ProductsModel> result = null;  
         try {
             result = jdbcTemplate.query(query, new RowMapper<ProductsModel>() {
                 @Override

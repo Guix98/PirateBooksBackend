@@ -33,9 +33,19 @@ public class ProductProviderController {
 
     @RequestMapping(method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ProductProviderModel>> findAllProduct(@RequestBody String json) throws JSONException {
+    public ResponseEntity<List<ProductProviderModel>> findAllProduct(@RequestHeader("Authorization") String authorization,@RequestBody String json) throws JSONException {
+        String tokenJwT = authorization.substring(7);
+        System.out.println("TOKEN JWT: " + tokenJwT);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwT);
+        String idUsuario = decodedJWT.getSubject();
+        System.out.println("USUARIO: " + idUsuario);
         JSONObject jsonObject = new JSONObject(json);
         int order = Integer.parseInt(jsonObject.getString("orderName"));
+        System.out.println("ORDER_NAME: " + order);
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString()) ) {
+            throw new RuntimeException("El token proporcionado no es un token de Autenthication");
+        }
+
 
 
         return new ResponseEntity<>( this.productProviderBl.findAllProduct(order), HttpStatus.OK);
