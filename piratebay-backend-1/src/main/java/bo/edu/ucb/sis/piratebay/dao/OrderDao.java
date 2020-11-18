@@ -22,9 +22,9 @@ public class OrderDao {
 
     public List<OrderModel> findAllOrders() {
 
-        String query = "SELECT order_id, user_id,  \"date\", amount" +
-                "\tFROM \"order\" a, \"user\" b"+
-                "\tWHERE a.user_id = b.user_id ";
+        String query = "SELECT order_id, x.user_id,  \"date\", amount\n" +
+                "                FROM \"order\" x, \"user\" y\n" +
+                "                WHERE x.user_id = y.user_id;";
         List<OrderModel> result = null;
         try {
             result = jdbcTemplate.query(query, new RowMapper<OrderModel>() {
