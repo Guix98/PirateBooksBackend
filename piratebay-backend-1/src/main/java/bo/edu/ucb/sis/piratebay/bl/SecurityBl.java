@@ -15,7 +15,6 @@ import com.auth0.jwt.JWT;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,13 +36,6 @@ public class SecurityBl {
         this.userDao = userDao;
     }
 
-    /**
-     * Este metodo recibe el usuario y password en plano, consulta a la base de datos, enviando el password con
-     * SHA256 + SALT, y si esta bien genera el token JWT
-     * @param username Nombre de usuario en plano
-     * @param password Contraseña en plano
-     * @return Token JWT.
-     */
     public Map<String, String> authenticate(String username, String password) {
         Map<String, String> result = new HashMap<>();
         String sha256hex = Hashing.sha256()

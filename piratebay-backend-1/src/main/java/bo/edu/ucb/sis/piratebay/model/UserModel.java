@@ -18,6 +18,11 @@ public class UserModel {
         this.catUserStatus = catUserStatus;
     }
 
+    public UserModel(Integer userId) {
+        this.userId = userId;
+
+    }
+
     public Integer getUserId() {
         return userId;
     }

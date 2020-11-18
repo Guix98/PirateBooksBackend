@@ -34,6 +34,7 @@ public class UserDao {
         return userId;
     }
 
+
     public List<UserModel> findAllActives() {
         // Implmentamos SQL varible binding para evitar SQL INJECTION
         String query = "SELECT user_id, username, email, phone_number, cat_user_status FROM \"user\" WHERE status = 1";
@@ -47,6 +48,26 @@ public class UserDao {
                             resultSet.getString(3),
                             resultSet.getString(4),
                             resultSet.getString(5));
+                }
+            });
+        } catch (Exception ex) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
+    public List<UserModel> findid(String username, String password ) {
+        System.out.println(username);
+        System.out.println(password);
+        // Implmentamos SQL varible binding para evitar SQL INJECTION
+        String query = "SELECT user_id FROM \"user\" WHERE username = '"+username+"' AND password = '"+password+"'";
+        List<UserModel> result = null;
+        try {
+            result = jdbcTemplate.query(query, new RowMapper<UserModel>() {
+                @Override
+                public UserModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                    return new UserModel(resultSet.getInt(1));
+
                 }
             });
         } catch (Exception ex) {
