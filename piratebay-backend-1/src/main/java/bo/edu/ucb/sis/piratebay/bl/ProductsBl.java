@@ -19,4 +19,11 @@ public class ProductsBl {
     public List<ProductsModel> findAllProduct(String category_name) {
         return this.productsDao.findAllProduct(category_name);
     }
+    public List<ProductsModel> findAllProducts() {
+        return this.productsDao.findAllProducts();
+    }
+    public List<ProductsModel> findProductsbyID(int id) {
+        return this.productsDao.findProductsbyID(id);
+    }
+
 }

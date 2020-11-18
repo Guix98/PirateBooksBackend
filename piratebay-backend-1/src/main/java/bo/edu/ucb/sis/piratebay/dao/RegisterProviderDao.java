@@ -24,7 +24,13 @@ public class RegisterProviderDao {
 
         try {
 
-            jdbcTemplate.update("INSERT INTO provider ( provider_id, provider_name, provider_zone, provider_street, email, phone, phone2, latitude, longitude, status, tx_id, tx_username, tx_host, tx_date)VALUES(  nextval('provider_provider_id_seq') , ?, ?, ?, ? ,? ,? ,0,0, 1, 1, 'root', '127.0.0.1',now())",registerProviderModel.getProvider_name(), registerProviderModel.getProvider_zone(),registerProviderModel.getProvider_street(),registerProviderModel.getEmail(),registerProviderModel.getPhone(),registerProviderModel.getPhone2());
+            jdbcTemplate.update("INSERT INTO provider ( provider_id, provider_name, provider_zone, provider_street, email, phone, phone2, latitude, longitude, status, tx_id, tx_username, tx_host, tx_date)VALUES(  nextval('provider_provider_id_seq') , ?, ?, ?, ? ,? ,? ,0,0, 1, 1, 'root', '127.0.0.1',now())",
+                    registerProviderModel.getProvider_name(),
+                    registerProviderModel.getProvider_zone(),
+                    registerProviderModel.getProvider_street(),
+                    registerProviderModel.getEmail(),
+                    registerProviderModel.getPhone(),
+                    registerProviderModel.getPhone2());
             return true;
         }
         catch (Exception ex)

@@ -70,7 +70,7 @@ public class ResetPasswordRequestBl {
 
         //attachPart.attachFile("C:\\Users\\Luchin111\\Desktop\\perfil.jpeg");
 
-        //multipart.addBodyPart(attachPart);
+        ////multipart.addBodyPart(attachPart);
         msg.setContent(multipart);
         // sends the e-mail
         Transport.send(msg);

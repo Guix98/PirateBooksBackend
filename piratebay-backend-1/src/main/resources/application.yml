@@ -25,5 +25,9 @@ piratebay:
   security:
     salt: qwertyuiop
     secretJwt: 1234567890
+stripe:
+  key:
+    public: pk_test_51HjuyILFhqp9lDfLFMHIeUJMfUJIpBEfNLuwCXdBXyJFk2LefZL8ZCL7ruojN3UNF19wnVdrIjAHVHMDZ2EajE2100aP7FxArg
+    secret: sk_test_51HjuyILFhqp9lDfLpUQM6FXRq08tgcNI29wjX37pTNRGJJawKJNZUOVcUOGWVXD7JtVoepmxRBjPoYS7A3k8qqOe00E2TgN1Rw
 
 # 123456qwertyuiop

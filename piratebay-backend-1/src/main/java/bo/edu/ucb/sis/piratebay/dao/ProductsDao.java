@@ -45,4 +45,54 @@ public class ProductsDao {
         }
         return result;
     }
+    public List<ProductsModel> findAllProducts() {
+
+        String query = "SELECT product_name, product_code, product_description, image, author, unit_price " +
+                "\tFROM product ";
+        List<ProductsModel> result = null;
+        try {
+            result = jdbcTemplate.query(query, new RowMapper<ProductsModel>() {
+                @Override
+                public ProductsModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                    return new ProductsModel(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getDouble(6));
+                }
+            });
+        } catch (Exception ex) {
+            throw new RuntimeException();
+        }
+        return result;
+    }
+    public  List<ProductsModel> findProductsbyID(int id) {
+
+
+            String query = "SELECT product_name, product_code, product_description, image, author, unit_price " +
+                    "\tFROM product"+
+                    "\tWHERE id_product= '"+id+"'";
+            List<ProductsModel> result = null;
+            try {
+                result = jdbcTemplate.query(query, new RowMapper<ProductsModel>() {
+                    @Override
+                    public ProductsModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                        return new ProductsModel(
+                                resultSet.getString(1),
+                                resultSet.getString(2),
+                                resultSet.getString(3),
+                                resultSet.getString(4),
+                                resultSet.getString(5),
+                                resultSet.getDouble(6));
+                    }
+                });
+            } catch (Exception ex) {
+                throw new RuntimeException();
+            }
+            return result;
+        }
+
+
 }
