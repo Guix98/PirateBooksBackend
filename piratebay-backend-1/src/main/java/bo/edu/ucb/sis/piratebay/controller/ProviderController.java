@@ -4,6 +4,7 @@ import bo.edu.ucb.sis.piratebay.bl.ProductsBl;
 import bo.edu.ucb.sis.piratebay.bl.ProvedorBl;
 import bo.edu.ucb.sis.piratebay.model.ProductsModel;
 import bo.edu.ucb.sis.piratebay.model.ProvedorModel;
+import bo.edu.ucb.sis.piratebay.model.ResetPasswordModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -17,7 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/provedor")
@@ -59,5 +62,33 @@ public class ProviderController {
         verifier.verify(tokenJwT);
 
         return new ResponseEntity<>( this.provedorBl.findProvedor(order), HttpStatus.OK);
+    }
+    @RequestMapping(value = "edit",method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> changePassword(@RequestHeader("Authorization") String authorization, @RequestBody ProvedorModel provedorModel) {
+        boolean vReturn = this.provedorBl.editProvider(provedorModel);
+        String tokenJwT = authorization.substring(7);
+        System.out.println("TOKEN JWT: " + tokenJwT);
+        DecodedJWT decodedJWT = JWT.decode(tokenJwT);
+        String idUsuario = decodedJWT.getSubject();
+        System.out.println("USUARIO: " + idUsuario);
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString()) ) {
+            throw new RuntimeException("El token proporcionado no es un token de Autenthication");
+        }
+        else{
+            Map <String, Object> response = new HashMap();
+            if(vReturn){
+                response.put("email", provedorModel.getProvider_id());
+                response.put("message", "Edit Provider Ok");
+                return new ResponseEntity<>(response, HttpStatus.OK);
+
+            }else{
+                response.put("message", "Error");
+                return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+            }
+
+        }
+
+
     }
 }

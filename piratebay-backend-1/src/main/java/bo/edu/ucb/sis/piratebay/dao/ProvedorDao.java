@@ -92,4 +92,20 @@ public class ProvedorDao {
         }
 
     }
+
+    public boolean editProvider(ProvedorModel provedorModel) {
+        try {
+
+            jdbcTemplate.update("UPDATE public.provider\n" +
+                    "\tSET  provider_name='"+provedorModel.getProvider_name()+"' , provider_zone='"+provedorModel.getProvider_zone()+"', provider_street='"+provedorModel.getProvider_street()+"', email='"+provedorModel.getEmail()+"', phone='"+provedorModel.getPhone()+"', phone2='"+provedorModel.getPhone2()+"'\n" +
+                    "\tWHERE provider_id="+provedorModel.getProvider_id()+";" +
+                    "");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Error per:"+ ex);
+            return  false;
+        }
+    }
 }

@@ -30,4 +30,7 @@ public class ProvedorBl {
     public boolean DeleteProvider(int provider_id) {
         return this.provedorDao.DeleteProvider(provider_id);
     }
+
+    public boolean editProvider(ProvedorModel provedorModel) {
+        return this.provedorDao.editProvider(provedorModel);}
 }
